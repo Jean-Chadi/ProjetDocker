@@ -30,3 +30,5 @@ services:
       PMA_HOST: mysql
     ports:
       - "8080:80"
+
+#network à créer
