@@ -8,5 +8,6 @@ import scrapy
 
 class ClavierprojetItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    titre = scrapy.Field()
+    prix = scrapy.Field()
+    site = scrapy.Field()
