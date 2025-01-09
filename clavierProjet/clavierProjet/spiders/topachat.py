@@ -25,5 +25,6 @@ class TopachatSpider(scrapy.Spider):
             prix_texte = prix_texte.replace("\u00a0", "").strip()
             clavier['prix'] = prix_texte
             clavier['site'] = 'topachat'
+            clavier['marque'] = response.xpath('//div[@class="ps-meta-links__wrapper"]/a[contains(@href, "pages/lexique2_marque_est_DUCKY%20CHANNEL_puis_cat_est_accueil.html")]/text()').get()
 
             yield clavier
