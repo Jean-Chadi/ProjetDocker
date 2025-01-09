@@ -25,6 +25,6 @@ class LdlcSpider(scrapy.Spider):
         keyboard = ClavierprojetItem()
         keyboard['titre'] = response.xpath("//h1[@class='title-1']/text()").get()
         keyboard['prix'] = response.xpath("//div[@class='price']/div/text()").get()
-        keyboard['site'] = 'topachat'
+        keyboard['site'] = 'ldlc'
 
         yield keyboard
