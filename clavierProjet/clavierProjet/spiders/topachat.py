@@ -1,5 +1,5 @@
 import scrapy
-from ..items import ClavierItem
+from ..items import ClavierprojetItem
 
 class TopachatSpider(scrapy.Spider):
     name = "topachat"
@@ -12,16 +12,18 @@ class TopachatSpider(scrapy.Spider):
                 lien = clavier.xpath('./a/@href').get()
                 yield response.follow(lien, self.parse_lien)
 
-            suivante = response.xpath('//div[@class="pl-pagination"]/a[@class="pl-pagination__nav custom-link"]/@href').get()
+            suivante = response.xpath('/html/body/div[1]/div/div/div[1]/div[2]/div[1]/main/nav/div/a[5]').get()
             if suivante is not None:
                 lien = response.urljoin(suivante)
                 yield scrapy.Request(lien)
 
 
     def parse_lien(self, response):
-            clavier = ClavierItem()
-            clavier['titre'] = response.xpath('//div[@class="offer-price__start"]/span[@class="offer-price__start-tooltip-price offer-price__start-tooltip-price--sales"]/text()').get()
-            clavier['prix'] = response.xpath('//div[@class="offer-price__start"]/span[@class="offer-price__start-tooltip-price offer-price__start-tooltip-price--sales"]/text()').get()
-         
+            clavier = ClavierprojetItem()
+            clavier['titre'] = response.xpath('//h1[@class="ps-main__product-title"]/text()').get()
+            prix_texte = response.xpath("//span[contains(@class, 'offer-price__price')]/text()").get()
+            prix_texte = prix_texte.replace("\u00a0", "").strip()
+            clavier['prix'] = prix_texte
+            clavier['site'] = 'topachat'
 
             yield clavier
