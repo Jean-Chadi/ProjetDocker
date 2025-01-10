@@ -1,9 +1,14 @@
-FROM debian
+FROM debian:latest
 
-RUN apt-get update && \
-    apt-get install -y apache2 && \
-    apt-get install -y libapache2-mod-php8.2
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    php \
+    libapache2-mod-php \
+    php-mysql \
+    && apt-get clean
+
+COPY ./www /var/www/html
 
 EXPOSE 80
-    
-ENTRYPOINT [ "/usr/sbin/apache2ctl", "-D", "FOREGROUND" ]
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]
