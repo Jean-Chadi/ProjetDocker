@@ -1,5 +1,6 @@
 import scrapy
 from ..items import ClavierprojetItem
+import time
 
 
 class LdlcSpider(scrapy.Spider):
@@ -22,9 +23,14 @@ class LdlcSpider(scrapy.Spider):
 
 
     def parse_lien(self, response):
+        time.sleep(2)
         keyboard = ClavierprojetItem()
-        keyboard['titre'] = response.xpath("//h1[@class='title-1']/text()").get()
-        keyboard['prix'] = response.xpath("//div[@class='price']/div/text()").get()
+        marque_texte = response.xpath("//tr[2]/td[@class='checkbox']/a/text()").get()
+        keyboard['marque'] = marque_texte.strip()
+        titre_texte = response.xpath("//h1[@class='title-1']/text()").get()
+        keyboard['titre'] = titre_texte.strip()
+        keyboard['prix'] = response.xpath("//div[@class='price']/div/text()").get() + response.xpath("//div[@class='price']/div/sup/text()").get()
         keyboard['site'] = 'ldlc'
+        keyboard['lien'] = response.url
 
         yield keyboard

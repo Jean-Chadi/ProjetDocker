@@ -1,7 +1,7 @@
 CREATE TABLE clavier (
  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
  titre VARCHAR(200),
- nom_site VARCHAR(200)
+ nom_site VARCHAR(200),
  marque VARCHAR(200),
  prix VARCHAR(200),
  lien VARCHAR(300),
