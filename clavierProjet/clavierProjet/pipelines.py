@@ -13,7 +13,7 @@ class ClavierprojetPipeline:
     def process_item(self, item, spider):
         return item
 
-class MysqlPipeline:
+class DatabaseInsertionPipeline:
     def process_item(self, item, spider):
         mydb = mysql.connector.connect(
         host="localhost",
