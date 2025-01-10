@@ -12,7 +12,7 @@ class TopachatSpider(scrapy.Spider):
                 lien = clavier.xpath('./a/@href').get()
                 yield response.follow(lien, self.parse_lien)
 
-            suivante = response.xpath('/html/body/div[1]/div/div/div[1]/div[2]/div[1]/main/nav/div/a[5]').get()
+            suivante = response.xpath('/html/body/div[1]/div/div/div[1]/div[2]/div[1]/main/nav/div/a[5]/@href').get()
             if suivante is not None:
                 lien = response.urljoin(suivante)
                 yield scrapy.Request(lien)
@@ -25,6 +25,6 @@ class TopachatSpider(scrapy.Spider):
             prix_texte = prix_texte.replace("\u00a0", "").strip()
             clavier['prix'] = prix_texte
             clavier['site'] = 'topachat'
-            clavier['marque'] = response.xpath('//div[@class="ps-meta-links__wrapper"]/a[contains(@href, "pages/lexique2_marque_est_DUCKY%20CHANNEL_puis_cat_est_accueil.html")]/text()').get()
-
+            clavier['marque'] = response.xpath('/html/body/div[1]/div/div/div[1]/div[2]/div[3]/div/div[4]/div[3]/a/text()').get()
+            clavier['lien']=response.url
             yield clavier
