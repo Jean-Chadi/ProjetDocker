@@ -1,6 +1,6 @@
 <?php
   // Paramètre de connexion à la BDD (à créer)
-  $host="localhost";
+  $host="mysql";
   $login="root";
   $passwd="root";
   $dbname="test";
