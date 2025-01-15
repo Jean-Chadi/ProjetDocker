@@ -88,7 +88,7 @@
                         <tr>
                             <td><?= htmlspecialchars($row['marque']) ?></td>
                             <td><?= htmlspecialchars($row['titre']) ?></td>
-                            <td><?= number_format((float)$row['prix'], 2, ',', ' ') ?> €</td>
+                            <td><?= htmlspecialchars($row['prix']) ?></td>
                             <td><?= htmlspecialchars($row['nom_site']) ?></td>
                             <td><a href="<?= htmlspecialchars($row['lien']) ?>" target="_blank">Voir le produit</a></td>
                         </tr>
